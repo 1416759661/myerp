@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class orderleftforsale
+ * Servlet implementation class orderheadlist
  */
-@WebServlet("/orderleftforsale")
-public class orderleftforsale extends HttpServlet {
+@WebServlet("/orderheadlistforsale")
+public class orderheadlistforsale extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public orderleftforsale() {
+    public orderheadlistforsale() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,42 +31,45 @@ public class orderleftforsale extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentpage = 1;
-		try {
-			String p = request.getParameter("p");
+		int currentpage=1;
+		try
+		{
+			String p=request.getParameter("p"); 
 			currentpage = Integer.valueOf(p);
-		} catch (Exception e) {
-			currentpage = 1;
 		}
-		DBHelper Dal = new DBHelper();		
-		String strSql = " select id from v_product order by id desc ";
+		catch(Exception e){
+			currentpage=1;
+		}
+		
+		DBHelper Dal=new DBHelper();
+		
+		String strSql=" select id from tbsaleorderhead order by id desc "; 
 		List<Map<String, Object>> listall = null;
 		List<Object> params = new ArrayList<Object>();
 		try {
-			listall = Dal.executeQuery(strSql, params);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
-		
-		Pager pageobj = new Pager();
-		pageobj.allrecordcount = listall.size();
-		pageobj.pagesize = 20;
-		pageobj.currentpage = currentpage;
-		pageobj.urlname = "";	
-		
-		
-		int startindex = pageobj.pagesize * (pageobj.currentpage - 1);
-		String strSqlpager = " select * from v_product order by id desc limit "+ startindex + "," + pageobj.pagesize + "";
-		List<Map<String, Object>> listpage = null;
-		try {
-			listpage = Dal.executeQuery(strSqlpager, params);
+			listall=Dal.executeQuery(strSql, params);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		String pagestr = pageobj.GetPageInfo();
+		
+		Pager pageobj=new Pager();
+		pageobj.allrecordcount=listall.size();
+		pageobj.pagesize=10;
+		pageobj.currentpage=currentpage;
+		pageobj.urlname="";
+		
+		int startindex=pageobj.pagesize*(pageobj.currentpage-1);
+		String strSqlpager=" select * from tbsaleorderhead  order by id desc limit "+startindex+","+pageobj.pagesize+""; 
+		List<Map<String, Object>> listpage = null;
+		try {
+			listpage=Dal.executeQuery(strSqlpager, params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String pagestr=pageobj.GetPageInfo();
 		request.setAttribute("pagestr", pagestr);
 		request.setAttribute("list", listpage);
-		request.getRequestDispatcher("/admin/prolistforsale.jsp").forward(request,response);
+		request.getRequestDispatcher("./admin/orderheadlistforsale.jsp").forward(request, response);
 	}
 
 	/**

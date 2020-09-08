@@ -47,15 +47,15 @@ String pagestr = (String)request.getAttribute("pagestr");
             alert("请选择一条需要操作的记录");
             return false;
         }
-
+		//0,5,6,0
         var s = "0";
         $("input.cb:checked").each(function (index, item) {
             s += "," + $(item).val();
         });
         s+= ",0";
         $.post("./ajax?" + Math.random(), { rnum: "10", idstr: s}, function (res) {
-            location.reload();
-            window.parent.frames["right"].document.location.href="./orderrightforsale";
+            location.reload();//刷新左侧页面
+            window.parent.frames["right"].document.location.href="./orderrightforsale";//刷新右侧页面
             //window.parent.frames["right"].document.location.reload();
         });
     });

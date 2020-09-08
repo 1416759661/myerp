@@ -38,12 +38,16 @@ public class editpassword extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//接收旧密码和新密码
 		String oldpassoword=request.getParameter("oldpassoword");
 		String newpassword=request.getParameter("newpassword");
-		
+		//获取当前登录的用户的id
 		String currentid=((Map<String,Object>)request.getSession().getAttribute("currentuser")).get("id").toString();
 		//修改密码的条件：新密码是多少   要修改哪个人的密码
 		//思路：第一步 验证旧密码是否正确  ，第二步：验证通过后把旧密码改为新密码
+		
+		//查询对应id这个人的旧密码是否输入正确
 		String strsql1="select * from tbusers where id=? and password=?";
 		
 		List<Object> params = new ArrayList<Object>();
