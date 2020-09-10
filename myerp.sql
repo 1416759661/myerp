@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2020-09-03 09:54:20
+Date: 2020-09-09 16:05:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,12 +20,12 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `tbdealer`;
 CREATE TABLE `tbdealer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `companyname` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `tel` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `memo` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '经销商\n\n表',
+  `companyname` varchar(255) DEFAULT NULL COMMENT '公司名称',
+  `name` varchar(255) DEFAULT NULL COMMENT '联系人',
+  `tel` varchar(255) DEFAULT NULL COMMENT '电话',
+  `address` varchar(255) DEFAULT NULL COMMENT '地址',
+  `memo` varchar(255) DEFAULT NULL COMMENT '备注信息',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -38,12 +38,12 @@ CREATE TABLE `tbdealer` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tbguestbook`;
 CREATE TABLE `tbguestbook` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) DEFAULT NULL,
-  `tel` varchar(255) DEFAULT NULL,
-  `contents` varchar(255) DEFAULT NULL,
-  `createtime` varchar(255) DEFAULT NULL,
-  `isshow` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '留言板表',
+  `username` varchar(255) DEFAULT NULL COMMENT '姓名',
+  `tel` varchar(255) DEFAULT NULL COMMENT '电话',
+  `contents` varchar(255) DEFAULT NULL COMMENT '留言内容',
+  `createtime` varchar(255) DEFAULT NULL COMMENT '创建时间',
+  `isshow` varchar(255) DEFAULT NULL COMMENT '是否展示本条留言',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -56,19 +56,19 @@ CREATE TABLE `tbguestbook` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tbinout`;
 CREATE TABLE `tbinout` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '入库和出库记录表',
   `opttype` int(11) DEFAULT NULL COMMENT '-1为出库，1为入库',
-  `proid` int(11) DEFAULT NULL,
-  `pronum` varchar(255) DEFAULT NULL,
-  `proname` varchar(50) DEFAULT NULL,
-  `protype` varchar(255) DEFAULT NULL,
-  `proimgurl` varchar(300) DEFAULT NULL,
-  `prooldnum` int(11) DEFAULT NULL,
+  `proid` int(11) DEFAULT NULL COMMENT '商品ID',
+  `pronum` varchar(255) DEFAULT NULL COMMENT '商品编号',
+  `proname` varchar(50) DEFAULT NULL COMMENT '商品名称',
+  `protype` varchar(255) DEFAULT NULL COMMENT '商品类别',
+  `proimgurl` varchar(300) DEFAULT NULL COMMENT '商品图片',
+  `prooldnum` int(11) DEFAULT NULL COMMENT '库存变化前的数量',
   `proaddnum` int(11) DEFAULT NULL COMMENT '入库或者出库的数量',
   `unitname` varchar(255) DEFAULT NULL COMMENT '计量单位名称',
-  `ctime` varchar(255) DEFAULT NULL,
+  `ctime` varchar(255) DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbinout
@@ -85,23 +85,24 @@ INSERT INTO `tbinout` VALUES ('9', '-1', '17', 'gl-2020', '格力空调gl-2020',
 INSERT INTO `tbinout` VALUES ('10', '1', '21', 'hw-2020-13', 'MateBook 13', '家用电器/笔记本电脑', '20200824172055164.png', '0', '100', '台', '2020-09-02 19:08:58');
 INSERT INTO `tbinout` VALUES ('11', '1', '21', 'hw-2020-13', 'MateBook 13', '家用电器/笔记本电脑', '20200824172055164.png', '100', '10', '台', '2020-09-03 09:35:40');
 INSERT INTO `tbinout` VALUES ('12', '1', '21', 'hw-2020-13', 'MateBook 13', '家用电器/笔记本电脑', '20200824172055164.png', '110', '100', '台', '2020-09-03 09:43:31');
+INSERT INTO `tbinout` VALUES ('13', '1', '21', 'hw-2020-13', 'MateBook 13', '家用电器/笔记本电脑', '20200824172055164.png', '210', '5', '台', '2020-09-05 14:36:02');
 
 -- ----------------------------
 -- Table structure for `tbmenubar`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbmenubar`;
 CREATE TABLE `tbmenubar` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `MenuName` varchar(100) DEFAULT NULL,
-  `ParentID` int(11) DEFAULT NULL,
-  `depth` int(11) DEFAULT NULL,
-  `ParentPath` varchar(100) DEFAULT NULL,
-  `Href` varchar(100) DEFAULT NULL,
-  `Target` varchar(100) DEFAULT NULL,
-  `OrderList` int(11) DEFAULT NULL,
-  `Visible` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '菜单表',
+  `MenuName` varchar(100) DEFAULT NULL COMMENT '菜单名称',
+  `ParentID` int(11) DEFAULT NULL COMMENT '父级菜单id',
+  `depth` int(11) DEFAULT NULL COMMENT '深度',
+  `ParentPath` varchar(100) DEFAULT NULL COMMENT '路径',
+  `Href` varchar(100) DEFAULT NULL COMMENT '链接',
+  `Target` varchar(100) DEFAULT NULL COMMENT '目标窗口',
+  `OrderList` int(11) DEFAULT NULL COMMENT '排序',
+  `Visible` int(11) DEFAULT NULL COMMENT '是否可见',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbmenubar
@@ -112,7 +113,7 @@ INSERT INTO `tbmenubar` VALUES ('3', '进货管理', '0', '1', '3', null, '', '3
 INSERT INTO `tbmenubar` VALUES ('4', '销售管理', '0', '1', '4', null, '', '4', '1');
 INSERT INTO `tbmenubar` VALUES ('5', '库存管理', '0', '1', '5', null, '', '7', '1');
 INSERT INTO `tbmenubar` VALUES ('6', '报表管理', '0', '1', '6', null, '', '8', '1');
-INSERT INTO `tbmenubar` VALUES ('7', '密码修改', '1', '2', '1,7', null, 'main', '1', '1');
+INSERT INTO `tbmenubar` VALUES ('7', '密码修改', '1', '2', '1,7', './admin/passwordedit.jsp', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('8', '新增用户', '1', '2', '1,8', './admin/usersadd.jsp', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('9', '建根类别', '2', '2', '2,9', './admin/tbtypeadd.jsp', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('10', '管理类别', '2', '2', '2,10', './tbtypelist', 'main', '1', '1');
@@ -120,8 +121,8 @@ INSERT INTO `tbmenubar` VALUES ('11', '新增商品', '2', '2', '2,11', './admin
 INSERT INTO `tbmenubar` VALUES ('12', '管理商品', '2', '2', '2,12', './prolist', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('13', '创建进货单', '3', '2', '3,13', './admin/ordermain.jsp', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('14', '管理进货单', '3', '2', '3,14', './orderheadlist', 'main', '2', '1');
-INSERT INTO `tbmenubar` VALUES ('15', '销售开单', '4', '2', '4,15', null, 'main', '1', '1');
-INSERT INTO `tbmenubar` VALUES ('16', '维护订单', '4', '2', '4,16', null, 'main', '1', '1');
+INSERT INTO `tbmenubar` VALUES ('15', '销售开单', '4', '2', '4,15', './admin/ordermainforsale.jsp', 'main', '1', '1');
+INSERT INTO `tbmenubar` VALUES ('16', '管理订单', '4', '2', '4,16', './orderheadlistforsale', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('17', '库存入库', '5', '2', '5,17', './admin/proinout.jsp?t=1', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('18', '商品出库', '5', '2', '5,18', './admin/proinout.jsp?t=-1', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('19', '商品查询', '5', '2', '5,19', 'prolistforsearch', 'main', '1', '1');
@@ -132,19 +133,23 @@ INSERT INTO `tbmenubar` VALUES ('23', '入库管理', '0', '1', '23', '', null, 
 INSERT INTO `tbmenubar` VALUES ('24', '出库管理', '0', '1', '24', null, null, '6', '0');
 INSERT INTO `tbmenubar` VALUES ('25', '明细查询', '5', '2', '5,25', './inoutlist', 'main', '1', '1');
 INSERT INTO `tbmenubar` VALUES ('26', '进货报表', '6', '2', '6,26', './admin/jinhuo.jsp', 'main', '1', '1');
+INSERT INTO `tbmenubar` VALUES ('27', '退还货管理', '0', '1', '27', null, null, '9', '1');
+INSERT INTO `tbmenubar` VALUES ('28', '新增记录', '27', '2', '27,28', './admin/changeadd.jsp', 'main', '1', '1');
+INSERT INTO `tbmenubar` VALUES ('29', '查询记录', '27', '2', '27,29', null, 'main', '1', '1');
+INSERT INTO `tbmenubar` VALUES ('30', '销售报表', '6', '2', '6,30', './admin/baobao_zhifangtu.jsp', 'main', '1', '1');
 
 -- ----------------------------
 -- Table structure for `tbnews`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbnews`;
 CREATE TABLE `tbnews` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) DEFAULT NULL,
-  `author` varchar(100) DEFAULT NULL,
-  `contents` text,
-  `createtime` varchar(100) DEFAULT NULL,
-  `typeid` varchar(11) DEFAULT NULL,
-  `source` varchar(20) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '信息发布表',
+  `title` varchar(100) DEFAULT NULL COMMENT '标题',
+  `author` varchar(100) DEFAULT NULL COMMENT '作者',
+  `contents` text COMMENT '内容',
+  `createtime` varchar(100) DEFAULT NULL COMMENT '创建时间',
+  `typeid` varchar(11) DEFAULT NULL COMMENT '类别',
+  `source` varchar(20) DEFAULT NULL COMMENT '来源',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -157,18 +162,18 @@ CREATE TABLE `tbnews` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tborderhead`;
 CREATE TABLE `tborderhead` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderid` varchar(255) DEFAULT NULL,
-  `sname` varchar(255) DEFAULT NULL,
-  `stel` varchar(255) DEFAULT NULL,
-  `saddress` varchar(255) DEFAULT NULL,
-  `sumprice` decimal(11,0) DEFAULT '0',
-  `memberid` int(11) DEFAULT NULL,
-  `ctime` varchar(255) DEFAULT NULL,
-  `ptime` varchar(255) DEFAULT NULL,
-  `memo` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '进货订单抬头表',
+  `orderid` varchar(255) DEFAULT NULL COMMENT '订单号（根据系统时间产生）',
+  `sname` varchar(255) DEFAULT NULL COMMENT '姓名',
+  `stel` varchar(255) DEFAULT NULL COMMENT '电话',
+  `saddress` varchar(255) DEFAULT NULL COMMENT '地址',
+  `sumprice` decimal(11,0) DEFAULT '0' COMMENT '总价',
+  `memberid` int(11) DEFAULT NULL COMMENT '用户id',
+  `ctime` varchar(255) DEFAULT NULL COMMENT '下单时间',
+  `ptime` varchar(255) DEFAULT NULL COMMENT '配送时间',
+  `memo` varchar(255) DEFAULT NULL COMMENT '备注信息',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tborderhead
@@ -181,21 +186,23 @@ INSERT INTO `tborderhead` VALUES ('31', '20200903093415442', '超级管理员', 
 INSERT INTO `tborderhead` VALUES ('32', '20200903094352419', '超级管理员', '15397600038', '四川成都总部', '5200', '1', '2020-09-03 09:43:52', null, null);
 INSERT INTO `tborderhead` VALUES ('33', '20200903094553085', '超级管理员', '15397600038', '四川成都总部', '4200', '1', '2020-09-03 09:45:53', null, null);
 INSERT INTO `tborderhead` VALUES ('34', '20200903094637149', '超级管理员', '15397600038', '四川成都总部', '6299', '1', '2020-09-03 09:46:37', null, null);
+INSERT INTO `tborderhead` VALUES ('35', '20200905143435624', '超级管理员', '15397600038', '四川成都总部', '67800', '1', '2020-09-05 14:34:35', null, null);
+INSERT INTO `tborderhead` VALUES ('36', '20200907142907220', '超级管理员', '15397600038', '四川成都总部', '9400', '1', '2020-09-07 14:29:07', null, null);
 
 -- ----------------------------
 -- Table structure for `tborderitems`
 -- ----------------------------
 DROP TABLE IF EXISTS `tborderitems`;
 CREATE TABLE `tborderitems` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderid` varchar(255) DEFAULT NULL,
-  `proid` int(11) DEFAULT NULL,
-  `proname` varchar(255) DEFAULT NULL,
-  `price` decimal(10,0) DEFAULT NULL,
-  `procount` int(11) DEFAULT NULL,
-  `imgurl` varchar(500) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '订单明细表',
+  `orderid` varchar(255) DEFAULT NULL COMMENT '订单号',
+  `proid` int(11) DEFAULT NULL COMMENT '商品编号',
+  `proname` varchar(255) DEFAULT NULL COMMENT '商品名称',
+  `price` decimal(10,0) DEFAULT NULL COMMENT '商品价格',
+  `procount` int(11) DEFAULT NULL COMMENT '商品数量',
+  `imgurl` varchar(500) DEFAULT NULL COMMENT '商品图片',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tborderitems
@@ -212,23 +219,28 @@ INSERT INTO `tborderitems` VALUES ('49', '20200903093415442', '20', '戴尔DELL�
 INSERT INTO `tborderitems` VALUES ('50', '20200903094352419', '21', 'MateBook 13', '5200', '1', '20200824172055164.png');
 INSERT INTO `tborderitems` VALUES ('51', '20200903094553085', '20', '戴尔DELL灵越5000', '4200', '1', '20200824171708716.png');
 INSERT INTO `tborderitems` VALUES ('52', '20200903094637149', '17', '格力空调gl-2020', '6299', '1', '20200823095339843.jpg');
+INSERT INTO `tborderitems` VALUES ('53', '20200905143435624', '21', 'MateBook 13', '5200', '5', '20200824172055164.png');
+INSERT INTO `tborderitems` VALUES ('54', '20200905143435624', '20', '戴尔DELL灵越5000', '4200', '5', '20200824171708716.png');
+INSERT INTO `tborderitems` VALUES ('55', '20200905143435624', '18', '华为MateBook14', '5200', '4', '20200824171445193.png');
+INSERT INTO `tborderitems` VALUES ('56', '20200907142907220', '21', 'MateBook 13', '5200', '1', '20200824172055164.png');
+INSERT INTO `tborderitems` VALUES ('57', '20200907142907220', '20', '戴尔DELL灵越5000', '4200', '1', '20200824171708716.png');
 
 -- ----------------------------
 -- Table structure for `tbproduct`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbproduct`;
 CREATE TABLE `tbproduct` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proname` varchar(255) DEFAULT NULL,
-  `pronum` varchar(255) DEFAULT NULL,
-  `typeid` int(11) DEFAULT NULL,
-  `price` decimal(10,0) DEFAULT NULL,
-  `brief` varchar(255) DEFAULT NULL,
-  `descriptions` text,
-  `address` varchar(255) DEFAULT NULL,
-  `procount` int(11) DEFAULT '0',
-  `imgurl` varchar(255) DEFAULT NULL,
-  `procodeurl` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品表',
+  `proname` varchar(255) DEFAULT NULL COMMENT '商品名称',
+  `pronum` varchar(255) DEFAULT NULL COMMENT '商品编号',
+  `typeid` int(11) DEFAULT NULL COMMENT '商品类别',
+  `price` decimal(10,0) DEFAULT NULL COMMENT '商品价格',
+  `brief` varchar(255) DEFAULT NULL COMMENT '商品简介',
+  `descriptions` text COMMENT '商品描述',
+  `address` varchar(255) DEFAULT NULL COMMENT '产地',
+  `procount` int(11) DEFAULT '0' COMMENT '数量',
+  `imgurl` varchar(255) DEFAULT NULL COMMENT '商品图片',
+  `procodeurl` varchar(255) DEFAULT NULL COMMENT '二维码图片路径',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
@@ -238,20 +250,20 @@ CREATE TABLE `tbproduct` (
 INSERT INTO `tbproduct` VALUES ('17', '格力空调gl-2020', 'gl-2020', '33', '6299', '能耗低', '<p>格力（GREE）I享 变频冷暖 蒸发器自洁 智能WiFi 静音 圆柱客厅空调立式柜机 线下同款 KFR-72LW/(72580)FNhAa-A3</p><p><br/></p>', '青岛', '440', '20200823095339843.jpg', '20200902190447336.jpg');
 INSERT INTO `tbproduct` VALUES ('18', '华为MateBook14', 'hw-2020', '34', '5200', '触控全面屏 多屏协同 轻薄本 深空灰', '<p>两年质保，7*24H咨询</p><p><br/></p><p><br/></p><p><br/></p>', '中国大陆', '20000', '20200824171445193.png', '20200902190442636.jpg');
 INSERT INTO `tbproduct` VALUES ('20', '戴尔DELL灵越5000', 'daier-2020', '34', '4200', '轻薄笔记本', '<p>戴尔DELL灵越5000 14英寸酷睿i5网课学习轻薄笔记本电脑(十代i5-1035G1 8G 512G MX230 2G独显)银</p><p><br/></p>', '中国大陆', '1000', '20200824171708716.png', '20200902190438141.jpg');
-INSERT INTO `tbproduct` VALUES ('21', 'MateBook 13', 'hw-2020-13', '34', '5200', ' 十代酷睿(i5 16G 512G MX250 触控屏 多屏协同)银', '<p>华为(HUAWEI)MateBook 13 2020款全面屏轻薄性能笔记本电脑 十代酷睿(i5 16G 512G MX250 触控屏 多屏协同)银</p><p><br/></p>', '中国大陆', '210', '20200824172055164.png', '20200902190431228.jpg');
+INSERT INTO `tbproduct` VALUES ('21', 'MateBook 13', 'hw-2020-13', '34', '5200', ' 十代酷睿(i5 16G 512G MX250 触控屏 多屏协同)银', '<p>华为(HUAWEI)MateBook 13 2020款全面屏轻薄性能笔记本电脑 十代酷睿(i5 16G 512G MX250 触控屏 多屏协同)银</p><p><br/></p>', '中国大陆', '215', '20200824172055164.png', '20200902190431228.jpg');
 
 -- ----------------------------
 -- Table structure for `tbrolehasmenu`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbrolehasmenu`;
 CREATE TABLE `tbrolehasmenu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `roleid` int(11) DEFAULT NULL,
-  `rolename` varchar(255) DEFAULT NULL,
-  `menuid` int(11) DEFAULT NULL,
-  `menuname` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '角色拥有的菜单',
+  `roleid` int(11) DEFAULT NULL COMMENT '角色id',
+  `rolename` varchar(255) DEFAULT NULL COMMENT '角色名称',
+  `menuid` int(11) DEFAULT NULL COMMENT '菜单id',
+  `menuname` varchar(255) DEFAULT NULL COMMENT '菜单名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=148 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbrolehasmenu
@@ -277,7 +289,6 @@ INSERT INTO `tbrolehasmenu` VALUES ('110', '1', null, '5', null);
 INSERT INTO `tbrolehasmenu` VALUES ('111', '1', null, '4', null);
 INSERT INTO `tbrolehasmenu` VALUES ('112', '1', null, '3', null);
 INSERT INTO `tbrolehasmenu` VALUES ('113', '1', null, '2', null);
-INSERT INTO `tbrolehasmenu` VALUES ('114', '1', null, '1', null);
 INSERT INTO `tbrolehasmenu` VALUES ('115', '2', null, '22', null);
 INSERT INTO `tbrolehasmenu` VALUES ('116', '2', null, '21', null);
 INSERT INTO `tbrolehasmenu` VALUES ('117', '2', null, '20', null);
@@ -311,15 +322,20 @@ INSERT INTO `tbrolehasmenu` VALUES ('144', '4', null, '19', null);
 INSERT INTO `tbrolehasmenu` VALUES ('145', '4', null, '5', null);
 INSERT INTO `tbrolehasmenu` VALUES ('146', '5', null, '6', null);
 INSERT INTO `tbrolehasmenu` VALUES ('147', '5', null, '26', null);
+INSERT INTO `tbrolehasmenu` VALUES ('148', '1', null, '27', null);
+INSERT INTO `tbrolehasmenu` VALUES ('149', '1', null, '29', null);
+INSERT INTO `tbrolehasmenu` VALUES ('150', '1', null, '28', null);
+INSERT INTO `tbrolehasmenu` VALUES ('151', '1', null, '1', null);
+INSERT INTO `tbrolehasmenu` VALUES ('152', '1', null, '30', null);
 
 -- ----------------------------
 -- Table structure for `tbroles`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbroles`;
 CREATE TABLE `tbroles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rolename` varchar(50) DEFAULT NULL,
-  `memo` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '角色表',
+  `rolename` varchar(50) DEFAULT NULL COMMENT '角色名称',
+  `memo` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -337,74 +353,126 @@ INSERT INTO `tbroles` VALUES ('5', '采购员', '采购员');
 -- ----------------------------
 DROP TABLE IF EXISTS `tbsaleorderhead`;
 CREATE TABLE `tbsaleorderhead` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderid` varchar(255) DEFAULT NULL,
-  `sname` varchar(255) DEFAULT NULL,
-  `stel` varchar(255) DEFAULT NULL,
-  `saddress` varchar(255) DEFAULT NULL,
-  `sumprice` decimal(11,0) DEFAULT '0',
-  `memberid` int(11) DEFAULT NULL,
-  `ctime` varchar(255) DEFAULT NULL,
-  `ptime` varchar(255) DEFAULT NULL,
-  `memo` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '销售订单抬头信息',
+  `orderid` varchar(255) DEFAULT NULL COMMENT '订单号',
+  `sname` varchar(255) DEFAULT NULL COMMENT '姓名',
+  `stel` varchar(255) DEFAULT NULL COMMENT '电话',
+  `saddress` varchar(255) DEFAULT NULL COMMENT '地址',
+  `sumprice` decimal(11,0) DEFAULT '0' COMMENT '总价',
+  `memberid` int(11) DEFAULT NULL COMMENT '用户id',
+  `ctime` varchar(255) DEFAULT NULL COMMENT '创建时间',
+  `ptime` varchar(255) DEFAULT NULL COMMENT '配送时间',
+  `memo` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbsaleorderhead
 -- ----------------------------
+INSERT INTO `tbsaleorderhead` VALUES ('3', '20200908143014645', '超级管理员', '15397600038', '四川成都总部', '14600', '1', '2020-05-08 14:30:14', null, null);
+INSERT INTO `tbsaleorderhead` VALUES ('4', '20200909100302129', '超级管理员', '15397600038', '四川成都总部', '9400', '1', '2020-06-09 10:03:02', null, null);
+INSERT INTO `tbsaleorderhead` VALUES ('5', '20200909100313064', '超级管理员', '15397600038', '四川成都总部', '14600', '1', '2020-08-09 10:03:13', null, null);
+INSERT INTO `tbsaleorderhead` VALUES ('6', '20200909100331701', '超级管理员', '15397600038', '四川成都总部', '24000', '1', '2020-09-09 10:03:31', null, null);
 
 -- ----------------------------
 -- Table structure for `tbsaleorderitems`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbsaleorderitems`;
 CREATE TABLE `tbsaleorderitems` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderid` varchar(255) DEFAULT NULL,
-  `proid` int(11) DEFAULT NULL,
-  `proname` varchar(255) DEFAULT NULL,
-  `price` decimal(10,0) DEFAULT NULL,
-  `procount` int(11) DEFAULT NULL,
-  `imgurl` varchar(500) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '销售订单明细表',
+  `orderid` varchar(255) DEFAULT NULL COMMENT '订单号',
+  `proid` int(11) DEFAULT NULL COMMENT '商品id',
+  `proname` varchar(255) DEFAULT NULL COMMENT '商品名称',
+  `price` decimal(10,0) DEFAULT NULL COMMENT '商品价格',
+  `procount` int(11) DEFAULT NULL COMMENT '购买数量',
+  `imgurl` varchar(500) DEFAULT NULL COMMENT '图片地址',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbsaleorderitems
 -- ----------------------------
+INSERT INTO `tbsaleorderitems` VALUES ('6', '20200908143014645', '20', '戴尔DELL灵越5000', '4200', '1', '20200824171708716.png');
+INSERT INTO `tbsaleorderitems` VALUES ('7', '20200908143014645', '18', '华为MateBook14', '5200', '2', '20200824171445193.png');
+INSERT INTO `tbsaleorderitems` VALUES ('8', '20200909100302129', '20', '戴尔DELL灵越5000', '4200', '1', '20200824171708716.png');
+INSERT INTO `tbsaleorderitems` VALUES ('9', '20200909100302129', '18', '华为MateBook14', '5200', '1', '20200824171445193.png');
+INSERT INTO `tbsaleorderitems` VALUES ('10', '20200909100313064', '20', '戴尔DELL灵越5000', '4200', '1', '20200824171708716.png');
+INSERT INTO `tbsaleorderitems` VALUES ('11', '20200909100313064', '18', '华为MateBook14', '5200', '1', '20200824171445193.png');
+INSERT INTO `tbsaleorderitems` VALUES ('12', '20200909100313064', '21', 'MateBook 13', '5200', '1', '20200824172055164.png');
+INSERT INTO `tbsaleorderitems` VALUES ('13', '20200909100331701', '20', '戴尔DELL灵越5000', '4200', '2', '20200824171708716.png');
+INSERT INTO `tbsaleorderitems` VALUES ('14', '20200909100331701', '18', '华为MateBook14', '5200', '2', '20200824171445193.png');
+INSERT INTO `tbsaleorderitems` VALUES ('15', '20200909100331701', '21', 'MateBook 13', '5200', '1', '20200824172055164.png');
 
 -- ----------------------------
 -- Table structure for `tbshoppingcar`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbshoppingcar`;
 CREATE TABLE `tbshoppingcar` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sessionid` varchar(32) DEFAULT NULL,
-  `proname` varchar(255) DEFAULT NULL,
-  `proid` int(11) DEFAULT NULL,
-  `procount` int(11) DEFAULT NULL,
-  `ctime` varchar(255) DEFAULT NULL,
-  `imgurl` varchar(255) DEFAULT NULL,
-  `price` decimal(10,0) DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '进货购物车',
+  `sessionid` varchar(32) DEFAULT NULL COMMENT '当前会话id',
+  `proname` varchar(255) DEFAULT NULL COMMENT '商品名称',
+  `proid` int(11) DEFAULT NULL COMMENT '商品id',
+  `procount` int(11) DEFAULT NULL COMMENT '进货数量',
+  `ctime` varchar(255) DEFAULT NULL COMMENT '添加时间',
+  `imgurl` varchar(255) DEFAULT NULL COMMENT '商品图片',
+  `price` decimal(10,0) DEFAULT '0' COMMENT '商品价格',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbshoppingcar
 -- ----------------------------
 INSERT INTO `tbshoppingcar` VALUES ('75', '41EFB73C20B2B946AB68D8917961A513', 'MateBook 13', '21', '1', '2020-08-26 15:39:18', '20200824172055164.png', '5200');
 INSERT INTO `tbshoppingcar` VALUES ('76', '41EFB73C20B2B946AB68D8917961A513', '戴尔DELL灵越5000', '20', '1', '2020-08-26 15:39:18', '20200824171708716.png', '4200');
+INSERT INTO `tbshoppingcar` VALUES ('87', '06757B2EE11F1F2976355227FFECE94E', '格力空调gl-2020', '17', '2', '2020-09-05 14:38:44', '20200823095339843.jpg', '6299');
+INSERT INTO `tbshoppingcar` VALUES ('90', 'D0D72BEA7F3773E5B851867BB3F73F34', 'MateBook 13', '21', '1', '2020-09-07 14:33:48', '20200824172055164.png', '5200');
+INSERT INTO `tbshoppingcar` VALUES ('91', 'D0D72BEA7F3773E5B851867BB3F73F34', '华为MateBook14', '18', '1', '2020-09-07 14:33:48', '20200824171445193.png', '5200');
+INSERT INTO `tbshoppingcar` VALUES ('92', 'D0D72BEA7F3773E5B851867BB3F73F34', '格力空调gl-2020', '17', '1', '2020-09-07 14:33:48', '20200823095339843.jpg', '6299');
+
+-- ----------------------------
+-- Table structure for `tbshoppingcarforsale`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbshoppingcarforsale`;
+CREATE TABLE `tbshoppingcarforsale` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '销售购物车',
+  `sessionid` varchar(32) DEFAULT NULL COMMENT '当前会话id',
+  `proname` varchar(255) DEFAULT NULL COMMENT '商品名称',
+  `proid` int(11) DEFAULT NULL COMMENT '商品id',
+  `procount` int(11) DEFAULT NULL COMMENT '销售数量',
+  `ctime` varchar(255) DEFAULT NULL COMMENT '添加时间',
+  `imgurl` varchar(255) DEFAULT NULL COMMENT '商品图片',
+  `price` decimal(10,0) DEFAULT '0' COMMENT '商品价格',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbshoppingcarforsale
+-- ----------------------------
+INSERT INTO `tbshoppingcarforsale` VALUES ('95', 'BC7CD7860C5B70648A2F15D0B5C93CDE', '戴尔DELL灵越5000', '20', '4', '2020-09-08 07:47:06', '20200824171708716.png', '4200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('96', 'BC7CD7860C5B70648A2F15D0B5C93CDE', '华为MateBook14', '18', '3', '2020-09-08 07:47:06', '20200824171445193.png', '5200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('97', 'BC7CD7860C5B70648A2F15D0B5C93CDE', '格力空调gl-2020', '17', '1', '2020-09-08 08:06:40', '20200823095339843.jpg', '6299');
+INSERT INTO `tbshoppingcarforsale` VALUES ('98', '863716552AC8404D538B883FFC5DD396', '戴尔DELL灵越5000', '20', '1', '2020-09-08 10:21:21', '20200824171708716.png', '4200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('99', '863716552AC8404D538B883FFC5DD396', '华为MateBook14', '18', '1', '2020-09-08 10:21:21', '20200824171445193.png', '5200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('100', '887E8BE7F09CF41A131E0BEF270EFEFB', '戴尔DELL灵越5000', '20', '1', '2020-09-08 14:29:45', '20200824171708716.png', '4200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('101', '887E8BE7F09CF41A131E0BEF270EFEFB', '华为MateBook14', '18', '2', '2020-09-08 14:29:45', '20200824171445193.png', '5200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('102', '6A2139899844BC5273CBCA6EB2724A5C', 'MateBook 13', '21', '2', '2020-09-08 17:03:38', '20200824172055164.png', '5200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('103', '6A2139899844BC5273CBCA6EB2724A5C', '戴尔DELL灵越5000', '20', '3', '2020-09-08 17:03:38', '20200824171708716.png', '4200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('104', '6A2139899844BC5273CBCA6EB2724A5C', '华为MateBook14', '18', '1', '2020-09-08 17:03:38', '20200824171445193.png', '5200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('105', '6A2139899844BC5273CBCA6EB2724A5C', '格力空调gl-2020', '17', '1', '2020-09-08 17:03:38', '20200823095339843.jpg', '6299');
+INSERT INTO `tbshoppingcarforsale` VALUES ('106', 'B350A3B9DCD1717CBCEAD9DF2727CC65', '戴尔DELL灵越5000', '20', '2', '2020-09-09 10:02:59', '20200824171708716.png', '4200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('107', 'B350A3B9DCD1717CBCEAD9DF2727CC65', '华为MateBook14', '18', '2', '2020-09-09 10:02:59', '20200824171445193.png', '5200');
+INSERT INTO `tbshoppingcarforsale` VALUES ('108', 'B350A3B9DCD1717CBCEAD9DF2727CC65', 'MateBook 13', '21', '1', '2020-09-09 10:03:09', '20200824172055164.png', '5200');
 
 -- ----------------------------
 -- Table structure for `tbsupplier`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbsupplier`;
 CREATE TABLE `tbsupplier` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `companyname` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `tel` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '供应商表',
+  `companyname` varchar(255) DEFAULT NULL COMMENT '公司名称',
+  `name` varchar(255) DEFAULT NULL COMMENT '联系人',
+  `tel` varchar(255) DEFAULT NULL COMMENT '电话',
+  `address` varchar(255) DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -417,12 +485,12 @@ CREATE TABLE `tbsupplier` (
 -- ----------------------------
 DROP TABLE IF EXISTS `tbtype`;
 CREATE TABLE `tbtype` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `typename` varchar(255) DEFAULT NULL,
-  `parentname` varchar(255) DEFAULT NULL,
-  `parentid` int(11) DEFAULT NULL,
-  `fullpath` varchar(255) DEFAULT NULL,
-  `levelnum` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品类别表',
+  `typename` varchar(255) DEFAULT NULL COMMENT '类别名称',
+  `parentname` varchar(255) DEFAULT NULL COMMENT '父类别名称',
+  `parentid` int(11) DEFAULT NULL COMMENT '父类别id',
+  `fullpath` varchar(255) DEFAULT NULL COMMENT '全路径',
+  `levelnum` int(11) DEFAULT NULL COMMENT '类别等级',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
@@ -447,12 +515,12 @@ INSERT INTO `tbtype` VALUES ('36', '小米', '电视机', '31', '家用电器/�
 DROP TABLE IF EXISTS `tbuserhasrole`;
 CREATE TABLE `tbuserhasrole` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `roleid` int(11) DEFAULT NULL,
-  `rolename` varchar(255) DEFAULT NULL,
+  `userid` int(11) DEFAULT NULL COMMENT '用户id',
+  `username` varchar(255) DEFAULT NULL COMMENT '用户名名称',
+  `roleid` int(11) DEFAULT NULL COMMENT '角色id',
+  `rolename` varchar(255) DEFAULT NULL COMMENT '角色名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbuserhasrole
@@ -467,14 +535,14 @@ INSERT INTO `tbuserhasrole` VALUES ('16', '13', null, '5', null);
 -- ----------------------------
 DROP TABLE IF EXISTS `tbusers`;
 CREATE TABLE `tbusers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
-  `truename` varchar(20) DEFAULT NULL,
-  `tel` varchar(255) DEFAULT NULL,
-  `memo` varchar(255) DEFAULT NULL,
-  `creatorid` int(11) DEFAULT NULL,
-  `createtime` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户表',
+  `username` varchar(20) DEFAULT NULL COMMENT '登录名',
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `truename` varchar(20) DEFAULT NULL COMMENT '真实姓名',
+  `tel` varchar(255) DEFAULT NULL COMMENT '电话',
+  `memo` varchar(255) DEFAULT NULL COMMENT '备注',
+  `creatorid` int(11) DEFAULT NULL COMMENT '创建者人',
+  `createtime` varchar(255) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 

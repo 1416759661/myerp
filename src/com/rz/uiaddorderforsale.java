@@ -110,7 +110,7 @@ public class uiaddorderforsale extends HttpServlet {
 	    
 	    
 	    //清空购物车
-	    String strSqlClearCar="delete from tbshoppingcar where sessionid=?";
+	    String strSqlClearCar="delete from tbshoppingcarforsale where sessionid=?";
 	    db.excuteSql(strSqlClearCar, params);
 	    
 	    response.setCharacterEncoding("utf-8");

@@ -51,8 +51,9 @@ public class ajax extends HttpServlet {
 		    case "6":getprotypehtmlforedit(request,response);break; 
 		    case "7":getproviewbynum(request,response);break; 
 		    case "8":addtocarbatch(request,response);break; 
-		    case "9":getSaleSumPricesByMonth(request,response);break; 
+		    case "9":getSumPricesByMonth(request,response);break; 
 		    case "10":addtocarbatchforsale(request,response);break; 
+		    case "11":getSaleSumPricesByMonth(request,response);break; 
 		    default : break;
 		}
 		
@@ -67,8 +68,8 @@ public class ajax extends HttpServlet {
 		
 	}
 	//每月进货总金额报表
-	protected void getSaleSumPricesByMonth(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String StrSql="SELECT DATE_FORMAT(ctime,'%Y-%m') as ctime,sum(sumprice) as sumprice FROM tborderhead where year(ctime)=? GROUP BY  ctime";
+	protected void getSumPricesByMonth(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String StrSql="SELECT DATE_FORMAT(ctime,'%Y-%m') as ctime1,sum(sumprice) as sumprice FROM tborderhead where year(ctime)=? GROUP BY  ctime1";
 		String cyear=request.getParameter("cyear");
 		List<Object> params= new ArrayList<Object>();
 		params.add(cyear);
@@ -78,18 +79,20 @@ public class ajax extends HttpServlet {
 		//{"datamonths":["1月","2月","3月"],"dataitems":[100,200,150]}
 		try {
 			reslist=db.executeQuery(StrSql, params);
+			
+			
 			String html_datamonths="[";
 			String html_dataitems="[";
 			int i=1;
 			for (Map<String, Object> m : reslist) {
 				if(i==reslist.size())
 				{
-					html_datamonths+="\""+m.get("ctime")+"\"";
+					html_datamonths+="\""+m.get("ctime1")+"\"";
 					html_dataitems+=m.get("sumprice");
 				}
 				else
 				{
-					html_datamonths+="\""+m.get("ctime")+"\",";
+					html_datamonths+="\""+m.get("ctime1")+"\",";
 					html_dataitems+=m.get("sumprice")+",";
 				}
 				i++;
@@ -97,6 +100,54 @@ public class ajax extends HttpServlet {
 			html_datamonths+="]";
 			html_dataitems+="]";
 			html="{\"datamonths\":"+html_datamonths+",\"dataitems\":"+html_dataitems+"}";
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/json;charset=utf-8");
+		response.getWriter().write(html);
+		
+	}
+		
+	//每月进货总金额报表
+	protected void getSaleSumPricesByMonth(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String StrSql="SELECT DATE_FORMAT(ctime,'%Y-%m') as ctime1,sum(sumprice) as sumprice FROM tbsaleorderhead where year(ctime)=? GROUP BY  ctime1";
+		String cyear=request.getParameter("cyear");
+		List<Object> params= new ArrayList<Object>();
+		params.add(cyear);
+		DBHelper db=new DBHelper();
+		List<Map<String, Object>> reslist = null;
+		String html="";
+		//{"datamonths":["1月","2月","3月"],"dataitems":[100,200,150]}
+		try {
+			reslist=db.executeQuery(StrSql, params);
+			
+			
+			String html_datamonths="[";
+			String html_dataitems="[";
+			int i=1;
+			for (Map<String, Object> m : reslist) {
+				if(i==reslist.size())
+				{
+					html_datamonths+="\""+m.get("ctime1")+"\"";
+					html_dataitems+=m.get("sumprice");
+				}
+				else
+				{
+					html_datamonths+="\""+m.get("ctime1")+"\",";
+					html_dataitems+=m.get("sumprice")+",";
+				}
+				i++;
+			}
+			html_datamonths+="]";
+			html_dataitems+="]";
+			html="{\"datamonths\":"+html_datamonths+",\"dataitems\":"+html_dataitems+"}";
+			
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		
