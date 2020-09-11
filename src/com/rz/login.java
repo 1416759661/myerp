@@ -51,15 +51,18 @@ public class login extends HttpServlet {
 		}
 		if(userlist.size()>0)
 		{
-			//currentmember
-			request.getSession().setAttribute("currentuser", userlist.get(0));
-			response.sendRedirect("/myerp/admin/default.jsp");
 			
+			request.getSession().setAttribute("currentuser", userlist.get(0));//此处记录用户信息应该放在记录日志之前。
+			tblogopt.addmsg(1,"登录成功!用户名:"+username+"密码：******", request);
+			response.sendRedirect("/myerp/admin/default.jsp");
 		}
 		else
 		{
-			request.setAttribute("msg", "用户名或密码错误");
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			tblogopt.addmsg(3,"登录失败!用户名:"+username+"密码："+password, request);
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("<font color='green'>登录失败！</font>");
+			response.setHeader("Refresh", "2;URL="+request.getContextPath()+"/admin/login.jsp");	
 		}
 	}
 
