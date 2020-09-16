@@ -596,8 +596,8 @@ public class ajax extends HttpServlet {
 	 获取商品类别html字符串for添加页面
 	*/
 	protected void getprotypehtml(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		listall.clear();
-		getData("0");
+		listall.clear();//每次请求都先清空listall这个集合
+		getData("0");//通过递归函数把类别表中的所有类别按顺序全部读取到集合中。
 		String html="<select name='typeid'>";
 		for(tbtype item:listall)
 		{

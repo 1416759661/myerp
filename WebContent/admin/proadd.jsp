@@ -43,6 +43,7 @@
  				
  			});
  			$(function(){
+ 				//页面加载完毕之后执行此处的代码
  				$.post("./../ajax?" + Math.random(), { rnum: "5" }, function (res) {
  	                $("#typeidbox").html(res.msg);
  	            });
